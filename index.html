@@ -166,6 +166,14 @@
             border-radius: 8px;
             margin-top: 20px;
         }
+
+        .sub-box {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px dashed var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
@@ -198,91 +206,130 @@
             
             <div class="manual-content">
                 <h2>Manual de Sistemas e Regras Avançadas “Frank” - V0.9</h2>
-                <p><strong>Fandom Brasil de Heróis - Outubro de 2026</strong>[cite: 1]</p>
+                <p><strong>RPG de Texto Brasil de Heróis Fandom - Versão 0.9 - Outubro 2026</strong></p>
 
                 <div class="credits">
                     <strong>Créditos:</strong><br>
                     - <strong>Victor Gaigaia:</strong> Autor do Cenário Oficial Brasil de Heróis, desenvolvimento de ideias.<br>
                     - <strong>Rexus:</strong> Desenvolvimento de ideias, escrita e revisão.<br>
                     - <strong>Dorivaldo:</strong> Desenvolvimento de ideias.<br>
-                    - <strong>Menções Honrosas:</strong> Documento criado usando de base o documento de Regras Completas Versão 2.1b1 e outros, com a participação de Gami, Dnodor (ideia de tipos de evolução), Vulturnos e Meth (Expansão do Capitalismo), e Gameboy (combate "ONCA - Gameboy").[cite: 1]
+                    - <strong>Menções Honrosas:</strong> Documento criado usando de base o documento de Regras Completas Versão 2.1b1 e outros. É importante mencionar a participação de: Gami, Dnodor (Ideia de tipos de evolução), Vulturnos e Meth (Escrita e desenvolvimento das atualizações da "Expansão do Capitalismo"), Gameboy (Ideias de combate no sistema "ONCA - Gameboy").
                 </div>
 
-                <h2>Nomenclaturas</h2>
+                <h2>NOMENCLATURAS</h2>
                 <ul>
-                    <li><strong>Vantagem:</strong> Dado Extra, role mais um d20 e escolha o melhor resultado[cite: 2].</li>
+                    <li><strong>Vantagem:</strong> Dado Extra, role mais um d20 e escolha o melhor resultado.</li>
                 </ul>
 
                 <h2>Sistema 1: Atributos Generalizados</h2>
-                <p>O NP, "Nível de Poder", sempre foi uma abstração da força geral dos personagens. Anteriormente no servidor, ele foi usado como a base comum dos poderes e o teto máximo na maioria dos casos.</p>
-                <p>Contudo, a ideia aqui é descontinuar o fato de que o NP equivale à força ofensiva e defensiva base de todos os poderes, abrindo opção de maior personalização de força para cada personagem, mantendo-o ainda como o teto máximo na maioria dos casos.</p>
-                <p>O NP agora define a quantidade de Pontos de Atributo que o Arete do seu personagem possui, a quantidade máxima de pontos que um Atributo pode ter e a quantidade de vida base[cite: 2].</p>
+                <p>O NP, "Nível de Poder", sempre foi uma abstração do poder de força geral dos personagens. Um termo para deixar as coisas simples. Anteriormente no servidor ele foi usado como a base comum dos poderes e o teto máximo também. "Você luta nesse nível e não pode ir além" (na maioria dos casos).</p>
+                <p>Contudo, aqui tentamos nos aproximar mais do cenário. A ideia aqui é descontinuar o fato de que o NP equivale a força ofensiva e defensiva base de todos os poderes, ao mesmo tempo que abrimos opção de maior personalização de força para cada personagem, mas ainda mantendo ele como o teto máximo dos personagens na maioria dos casos.</p>
+                <p>O NP, agora, define a quantidade de Pontos de Atributo que o Arete do seu personagem possui, a quantidade máxima de pontos que um Atributo pode ter e a quantidade de vida base.</p>
                 
                 <div class="formula">
                     Pontos de Atributo = NP × 3<br>
-                    Vida até NP10 = NP × 2 (Ex: NP10 possui 20 de Vida Base)<br>
-                    Vida após NP10 = Um a cada NP (Ex: NP20 possui 30 de Vida Base)
+                    Vida até NP10: NP × 2 (Ex: Um personagem NP10 possui 20 de Vida Base)<br>
+                    Vida após NP10: Um a cada NP (Ex: Um personagem NP20 possui 30 de Vida Base)
                 </div>
 
                 <h3>Atributos</h3>
-                <p>Eles são uma abstração da capacidade do seu Arete e dos seus poderes. Todos os poderes utilizam a mesma tabela de atributos para rolagens[cite: 2]:</p>
+                <p>Eles são uma abstração da capacidade do seu Arete e dos seus poderes. Devido a isso, todos os poderes utilizam a mesma tabela de atributos para fazer rolagens.</p>
                 <ul>
-                    <li><strong>Vida:</strong> Cada ponto investido aqui aumenta sua Vida Base em 2[cite: 2].</li>
-                    <li><strong>Acerto:</strong> Precisão dos poderes. Quantidade de bônus na rolagem ao tentar atacar alguém[cite: 2].</li>
-                    <li><strong>Dano:</strong> Capacidade de causar destruição direta usando poderes. O tamanho do dado de dano usado ao acertar (ex: Dano 3 significa causar d3 de dano)[cite: 2].</li>
-                    <li><strong>Defesa:</strong> Capacidade defensiva dos poderes. Bônus na rolagem ao tentar se defender de algo ou defender alguém[cite: 2].</li>
-                    <li><strong>Efeitos Ofensivos (EO):</strong> Capacidade de causar Dano Contínuo e Status (Prender ou Atordoar). É necessário ter acertado o inimigo (usando Acerto)[cite: 2].</li>
-                    <li><strong>Efeitos Positivos (EP):</strong> Capacidade de fazer efeitos positivos em si ou aliados (Cura, Regeneração e Buffs)[cite: 2].</li>
+                    <li><strong>Vida:</strong> Cada ponto investido aqui aumenta sua Vida Base em 2.</li>
+                    <li><strong>Acerto:</strong> Este atributo significa precisão dos seus poderes. A quantidade de bônus na rolagem que o personagem terá ao tentar atacar alguém.</li>
+                    <li><strong>Dano:</strong> Este atributo significa a capacidade de causar destruição direta usando seus poderes. O tamanho do dado de dano que será usado ao acertar alguém. Ou seja? Dano 3 significa causar d3 de dano caso o ataque acerte.</li>
+                    <li><strong>Defesa:</strong> Este atributo significa capacidade defensiva dos seus poderes. A quantidade de bônus na rolagem que o personagem terá ao tentar se defender de algo, ou defender alguém de algo.</li>
+                    <li><strong>Efeitos Ofensivos (EO):</strong> Este atributo significa a capacidade dos seus poderes de fazer efeitos ofensivos em inimigos. Basicamente Dano Contínuo e Status (Prender ou Atordoar). É necessário ter acertado (usando atributo Acerto) um inimigo.</li>
+                    <li><strong>Efeitos Positivos (EP):</strong> Este atributo significa a capacidade dos seus poderes de fazer efeitos positivos em si ou aliados. Cura, Regeneração e Buffs entram aqui.</li>
                 </ul>
-                <p><em>Observação:</em> Ter pelo menos um ponto investido nos atributos Dano ou Efeitos Ofensivos faz o atributo Acerto ter pelo menos 1 ponto investido, caso não tenha pontos nele[cite: 2].</p>
+                <p><em>Observação:</em> Ter pelo menos um ponto investido nos atributos Dano ou Efeitos Ofensivos faz o atributo Acerto ter pelo menos 1 ponto investido caso não tenham pontos investidos nele.</p>
 
-                <h3>Descrição detalhada de Efeitos Ofensivos</h3>
+                <h3>Descrição detalhada de Efeitos Ofensivos:</h3>
                 <ul>
-                    <li><strong>Marcas de Status (Dano Contínuo e Atordoar):</strong> Ao acertar um inimigo e optar por isso em vez de dano direto, você aplica um número de marcas igual ao <em>EO dividido por 5 (arredondado para baixo)</em>. O máximo de marcas é o valor do EO[cite: 2, 3].</li>
-                    <li><strong>Dano Contínuo (DT):</strong> Causam dano no início do turno do inimigo e persistem até que ele use uma ação para desfazê-las[cite: 3].</li>
-                    <li><strong>Atordoamento (AT):</strong> Se o número de marcas for igual ou maior que o NP do inimigo, ele é atordoado até o final do próximo turno (sem usar ações e ataques contra ele possuem vantagem). Se o seu NP for maior que o do inimigo, o número de marcas AT é dobrado[cite: 3].</li>
-                    <li><strong>Prender:</strong> Prende o inimigo dependendo da descrição da prisão; ele não poderá atacar e precisará usar a ação para escapar[cite: 3].</li>
-                </ul>
-
-                <h3>Descrição detalhada de Efeitos Positivos</h3>
-                <ul>
-                    <li><strong>Curar:</strong> Cura um aliado em um valor igual ao <em>Efeitos Positivos dividido por 5 (arredondado para baixo)</em>. Autocura é possível, mas a cura recebida é 1/10 do atributo[cite: 3].</li>
-                    <li><strong>Regeneração:</strong> Cura a si mesmo em um valor igual ao <em>Efeitos Positivos dividido por 5 (arredondado para baixo)</em>[cite: 3].</li>
-                    <li><strong>Buff:</strong> Oferece benefício a si ou aliado (concede vantagem se fizer sentido). Permanece até ser usado ou por 3 turnos, podendo ser mantido gastando uma ação[cite: 3].</li>
+                    <li><strong>Marcas de Status (Dano Contínuo e Atordoar):</strong> Ao acertar um inimigo e decidir causar isto ao invés de Dano direto, você aplica um número de marcas igual o atributo Efeitos Ofensivos dividido por 5, arredondado para baixo. Você pode escolher entre marcas de Dano Contínuo (DT) ou Atordoar (AT). O número máximo de marcas é o valor no atributo Efeitos Ofensivos (mas é anotado diferente para cada tipo de marca).</li>
+                    <li><strong>Dano Contínuo:</strong> Essas marcas causam dano no início do turno do inimigo e permanecem existentes até o inimigo usar sua ação para desfazer as marcas.<br><em>Exemplo:</em> Você acerta e tem EO 16. Você decide aplicar Marcas de Status. O inimigo recebe 3 marcas. Você escolhe causar Dano Contínuo 3. No início do turno dele o inimigo irá tomar 3 de dano.</li>
+                    <li><strong>Atordoamento:</strong> Se o número de marcas for igual ou maior ao NP do inimigo, ele é atordoado até o final do próximo turno dele. Ele não pode usar ações e ataques contra ele possui vantagem. Após isso as marcas somem. É possível usar uma ação para desfazer as marcas. Se o seu NP for maior que o do inimigo, o número de marcas AT é dobrado.</li>
+                    <li><strong>Prender:</strong> Ao acertar um inimigo e decidir usar isto ao invés de Dano direto, você o prende. Dependendo da prisão (descreva ela!) e da forma de ataque e movimento do inimigo, ele não poderá atacar e precisará usar sua ação para escapar da prisão.</li>
                 </ul>
 
-                <h2>Diferentes Posturas em Combate</h2>
-                <p>A escolha da postura é feita no início do turno (caso não esteja atordoado)[cite: 4, 5]:</p>
+                <h3>Descrição detalhada de Efeitos Positivos:</h3>
                 <ul>
-                    <li><strong>Contra-Ataque:</strong> Não rola defesa ativa (possui apenas a Defesa Pura equivalente ao atributo de Defesa). Se o inimigo errar o ataque, o defensor pode contra-atacar[cite: 4, 5].</li>
-                    <li><strong>Postura Defensiva:</strong> Recebe +1 na Defesa, mas -1 no Acerto[cite: 5].</li>
-                    <li><strong>Postura Ofensiva:</strong> Recebe +1 no Acerto, mas -1 na Defesa[cite: 5].</li>
-                    <li><strong>Postura Atiradora:</strong> Recebe +1 no Acerto e Defesa à distância, mas -1 no Acerto e Defesa corpo-a-corpo[cite: 5].</li>
-                    <li><strong>Postura Próxima:</strong> Recebe +1 no Acerto e Defesa corpo-a-corpo, mas -1 no Acerto e Defesa à distância[cite: 5].</li>
+                    <li><strong>Curar:</strong> Você cura um aliado em um valor igual o atributo Efeitos Positivos dividido por 5, arredondado para baixo. Tentar "se curar" (autocura) é possível, mas a cura recebida é 1/10 do atributo.</li>
+                    <li><strong>Regeneração:</strong> Você se cura em um valor igual o atributo Efeitos positivos dividido por 5, arredondado para baixo.</li>
+                    <li><strong>Buff:</strong> Você oferece algum tipo de benefício à um aliado ou a si próprio. Descreva ele, e se fizer sentido o aliado receberá vantagem em acertar um inimigo. O buff permanece até ser usado ou até 3 turnos do aliado buffado passarem, mas você pode manter o buff gastando sua ação.</li>
                 </ul>
 
-                <h2>Perícias e Super-Equipamentos</h2>
-                <p>O bônus numérico no d20 é estritamente conectado ao Arete. Perícias e Itens são externos e não oferecem bônus numérico direto, mas atuam de outras formas[cite: 5]:</p>
-                <ul>
-                    <li><strong>Perícias:</strong> Usada em combate, concede Vantagem na rolagem, a menos que o oponente também possua uma (caso em que apenas o maior nível ganha; se iguais, ninguém ganha). Combater <em>apenas</em> com perícias (sem poderes) oferece o nível da perícia como bônus fixo[cite: 5].</li>
-                    <li><strong>Itens de Poder:</strong> Concedem poderes novos (até Nível 15, com pontos de atributos iguais ao Nível × 2). Usá-los com poderes concede Vantagem baseada na comparação de níveis e atributos de confronto[cite: 5].</li>
-                    <li><strong>Implementações:</strong> Melhoram poderes existentes (vão até Nível 20; pontos de atributo iguais ao Nível). O usuário pode optar por usar os atributos da implementação para a rolagem[cite: 5].</li>
-                </ul>
-                <p><strong>Limite de Vantagem:</strong> No máximo <strong>uma Vantagem por categoria</strong> por ação (1 Poder, 1 Item de Poder, 1 Perícia e 1 Buff), totalizando no máximo 4 dados rolados[cite: 5].</p>
+                <div class="sub-box">
+                    <h3>Modelos de Ficha citados no documento</h3>
+                    <p><strong>FICHA DE PERSONAGEM:</strong> Nick, Convite, Tipo, Patamar (NP), Nome Completo, Data de Nascimento, Nome Heroico, Virtude, Histórico, Curso, Profissão, Alomorfo, Fisionomia, Complicações (Anomalia, Fraquezas, problemas).</p>
+                    <p><strong>ARETE & PERÍCIAS:</strong> Arete (Poderes: [Poder] x4), Perícias, Aparência (Resumo/Diferenças da Imagem, Imagem).</p>
+                    <p><strong>FICHA DE EVOLUÇÃO:</strong> Nick, Tipo, NP, Nome Completo, Nome Heroico, Fisionomia, Alomorfo, Complicações, Arete (Poder Novo), Atributos (Vida, Acerto, Dano, Defesa, EO, EP), Vida Máxima, Perícias, Super-Equipamentos, Premiações Especiais e Coleções.</p>
+                </div>
 
-                <h2>Aumentação, Nume/Avatar e Extras</h2>
+                <h2>Adendos do Sistema de Atributos Generalizados: Diferentes Posturas</h2>
+                <p>Sim, agora será possível adotar uma postura diferente para combater. Isto já foi implementado anteriormente em outros sistemas, aqui estaremos apenas definindo as possíveis e a funcionalidade. Esta escolha é feita no início do seu turno (desde que você não esteja atordoado).</p>
                 <ul>
-                    <li><strong>Extra Foco:</strong> Deve ser especificado se melhora Acerto, Dano ou Efeitos[cite: 6].</li>
-                    <li><strong>Aumentação:</strong> Oferece energia extra temporária (NP adicional). O usuário escolhe 3 atributos para receber um bônus igual ao nível da aumentação (pode ultrapassar o teto do NP) por um número de rodadas igual ao nível. Exige recarga fora de combate[cite: 6].</li>
-                    <li><strong>Nume (Avatar):</strong> Aumenta todos os atributos permanentemente em um valor igual ao nível do Nume, mas restrito aos poderes provenientes dele. Não pode ser ativado junto com Aumentação[cite: 6].</li>
+                    <li><strong>Contra-Ataque:</strong> Ao adotar esta postura, o personagem não consegue ativamente rolar defesa. O único que ele possui é a Defesa Pura, que equivale ao atributo de Defesa. Contudo, caso um inimigo erre o ataque, o defensor pode fazer um ataque contra ele.</li>
+                    <li><strong>Postura Defensiva:</strong> Recebe +1 na Defesa mas recebe -1 no Acerto.</li>
+                    <li><strong>Postura Ofensiva:</strong> Recebe +1 no Acerto mas recebe -1 na Defesa.</li>
+                    <li><strong>Postura Atiradora:</strong> Recebe +1 no Acerto e Defesa à distância, mas recebe -1 no Acerto e Defesa corpo-a-corpo.</li>
+                    <li><strong>Postura Próxima:</strong> Recebe +1 no Acerto e Defesa corpo-a-corpo, mas recebe -1 no Acerto e Defesa à distância.</li>
+                </ul>
+
+                <h2>Como ficam as Perícias e os Super-Equipamentos?</h2>
+                <p>Neste sistema, o bônus numérico oferecido à rolagem no d20 é algo estritamente conectado ao Arete da pessoa. A capacidade de precisão, destruição e dano, dos efeitos ou defesa máxima dos poderes do personagem. Devido a isso é necessário perceber que tanto Perícias quanto Itens são coisas externas aos poderes que não irão oferecer um bônus numérico. Contudo irão ser úteis de outra forma.</p>
+                <p><strong>Iniciando com Perícias:</strong> um personagem que possua uma que possa ser usada em combate e a utilize irá receber Vantagem na rolagem. Contudo isso só ocorre se o inimigo ao qual você está disputando não possua também uma. Nesse caso apenas quem tiver a Perícia com maior nível irá receber o benefício, e se ambos tiverem Perícias de nível igual... Ninguém irá. Combater usando apenas Perícias (sem poderes) irá oferecer o nível da Perícia como bônus na rolagem do d20, mas vale lembrar que isso só ocorre quando todos os combatentes estão usando apenas Perícias.</p>
+                <p><strong>Já Super-Equipamentos</strong> é um caso um pouco diferente. De início é necessário entender que existem dois tipos, "Itens de Poder" e "Implementações", e ambos possuem os atributos Acerto, Dano, Defesa e Efeitos.</p>
+                <ul>
+                    <li><strong>Itens de Poder:</strong> são itens que oferecem poderes novos ao personagem. Ainda seguem as regras de Super-Equipamentos do manual base, podendo chegar até Nível 15, e os pontos para investir nos atributos deles equivalem ao Nível dele x 2. Utilizar um Item de Poder junto de um ataque usando poderes oferece Vantagem na rolagem igual à regra de Perícias, mas com um passo extra: Caso ambos os personagens (atacante e defensor) tenham Itens de Poder de mesmo Nível, deverá ser visto os atributos: se o item do atacante tiver atributo Acerto maior do que o atributo Defesa do defensor, o atacante é que terá o benefício, e vice-versa; se for um empate, ninguém obtém o benefício.</li>
+                    <li><strong>Implementações:</strong> são itens que melhoram um dos poderes que o usuário já possui. Elas são mais baratas de se comprar, podendo ir até Nível 20. A quantidade de pontos para investir nos atributos será igual ao Nível dela. Ao utilizar um poder que está sendo melhorado por uma Implementação, o personagem pode escolher usar os atributos da Implementação para a rolagem.</li>
+                    <li><strong>Custo Reduzido:</strong> O custo por nível de uma Implementação é um quarto do custo de um Item de Poder (veja Expansão do Capitalismo) até o nível 10. Do nível 11 ao 15 o custo aumenta em mil a cada nível (nível 15 = 6 mil), e do nível 16 ao 20 o custo aumenta em 2 mil a cada nível (nível 20 = 16 mil).</li>
+                </ul>
+                <p><strong>Vantagem e o limite disso:</strong> Só é possível receber uma Vantagem por categoria. Ou seja, no máximo um Poder, um Item de Poder, uma Perícia e um Buff podem ser usados em uma ação, assim totalizando 4 dados rodados.</p>
+
+                <h2>Como fica o Extra Foco?</h2>
+                <p>Aqui, o Extra Foco recebe apenas um leve ajuste em relação à sua versão "de Ataque" explicada na Lista de Poderes. Um Extra Foco de Ataque, ao ser usado, deve ser especificado se irá melhorar o Acerto, Dano ou Efeitos.</p>
+
+                <h2>Como Nume/Avatar e Aumentação funcionam?</h2>
+                <p><strong>Aumentação:</strong> Oferece energia extra temporária para o personagem. Em termos de sistema isso é traduzido em NP adicional. Contudo Aumentações normalmente não são benefícios gerais, ou seja, não melhoram "tudo" do personagem. Ao ativar uma Aumentação o personagem escolhe 3 atributos para melhorar. Estes atributos então recebem um bônus neles equivalente ao nível da Aumentação, e esse bônus pode ultrapassar o limite máximo de NP do personagem. E sim, aumentar o atributo Vida também aumenta sua vida atual e máxima. Este benefício dura por um número de rodadas igual ao nível da Aumentação. É necessário "recarregar" a Aumentação após o uso, feito apenas fora de combate.</p>
+                <p><strong>Já o Nume</strong> é algo mais especial, ter um te torna um Avatar. Ele aumenta todos os seus atributos (duração ilimitada) em um valor igual ao nível do Nume mas apenas para os poderes provenientes do Nume (isto é, comprados com os Pontos de Poder oferecidos pelo Nume).</p>
+                <ul>
+                    <li>É possível receber o mesmo aumento que uma Aumentação dá para os atributos para os outros poderes, sendo que é necessário seguir as mesmas regras, sendo necessário "ativar" a melhoria, escolher quais atributos melhorar, tem duração e depois é necessário "recarregar".</li>
+                    <li>Um detalhe importante sobre Numes e Avatares é que não é possível ativar uma Aumentação e a melhoria de Nume ao mesmo tempo, além de que não é possível melhorar poderes provenientes do Nume mediante uma Aumentação.</li>
+                </ul>
+
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;">
+
+                <h2>=== A ser visto / Em Teste ===</h2>
+                <p><strong>Ultra Esforço:</strong> No cenário oficial as pessoas não estão lutando em seu máximo o tempo todo. A comparação seria corrida, você só corre em seu máximo durante um tempo antes de se cansar. Em termos de sistema e lógica esta ideia gira entorno de limitar personagens a combater usando um valor menor do que o NP (NP-5 talvez) e só conseguirem chegar no valor completo de NP ao utilizar o Ultra Esforço. Outra opção é ser possível ir acima do NP por um determinado tempo.</p>
+                <p><strong>Balanceamento de Dano Contínuo em Efeitos Ofensivos:</strong> Caso esteja muito forte, já foi pensado em modificar a regra em duas formas:</p>
+                <ul>
+                    <li>Ao aplicar marcas, você rolará um dado com o tamanho da quantidade de marcas que você normalmente aplicaria (se seriam 5 marcas, seria um d5) e a quantidade de marcas aplicadas dependerá dessa rolagem.</li>
+                    <li>Ao aplicar marcas, você rolará um dado com o tamanho da quantidade de marcas que o alvo possui (se são 5 marcas, seria um d5), e a quantidade de dano dependerá dessa rolagem.</li>
+                </ul>
+                <p><strong>Regra para Debuffs gerais:</strong> Diferente de Prender ou Atordoar, existem efeitos negativos que envolvem diminuir as chances de sucesso nas ações de alguém. Deixar o terreno escorregadio ou deixar alguém cego são exemplos. Como padrão, este tipo de efeito negativo entra na regra de "Prender", onde você acerta um inimigo e decide aplicar este efeito negativo, assim fazendo o inimigo rolar com desvantagem (roda 2 dados e pega o pior resultado) na rolagem, sendo que é possível retirar este efeito com uma ação. Vale lembrar que, igual Prender, é possível ignorar efeitos negativos dependendo dos poderes do alvo (uma pessoa que voa não vai escorregar; uma pessoa que possui Sentido Sísmico não precisa ver).</p>
+                
+                <p><strong>Outras opções possíveis para a regra de Super-Equipamentos e Perícias:</strong></p>
+                <ul>
+                    <li><strong>A:</strong> Seguir a ideia antiga de existirem apenas Itens de Poder e "dá bônus na rolagem de +1 a cada 5 níveis" e "conseguir usar o poder do item para fazer uma rolagem dependendo do nível do item (que agora vai depender do atributo)".</li>
+                    <li><strong>B:</strong> Implementações dão Dado Extra na ação desde que o alvo não tenha uma Implementação para ajudar na ação dele, caso ambos tenham apenas o que tiver maior nível ganhará Dado Extra; caso ambos tenham no mesmo nível ninguém ganha Dado Extra.</li>
+                    <li><strong>B2:</strong> Utilizar a regra de "ninguém ganha Dado Extra" também em Itens de Poder. Se ambos tiverem Item de Poder, apenas o de maior nível ganha Dado Extra. Se ambos tem níveis iguais, quem tiver maior Atributo pra ação ganha Dado Extra. Se ambos tem atributos iguais, ninguém ganha Dado Extra.</li>
+                    <li><strong>B3:</strong> Outra opção para Itens de Poder em combate com poderes é ser um "Ataque Extra" com bônus diferente dos do personagem, e aí escolhe a melhor rolagem (Dado Extra só que nerfado, é mais próximo do cenário).</li>
+                </ul>
+
+                <p><strong>Aproximação do Cenário - Melhores Atributos:</strong> É necessário fazer uma revisão dos atributos. Separar Defesa em dois, um chamado "Esquiva" (que irá lutar contra Acerto) e outro chamado Proteção (que irá lutar contra "Dano"). Junto disso é necessário rever o atributo Vida.</p>
+                <p><strong>Aproximação do Cenário - Média de Atributos e Maleabilidade:</strong> Basicamente existe a necessidade de ter atributos já com pontos investidos para Forjados. Um "médico" tem um mínimo de força, mesmo não tendo investido nela, acima de um civil normal. Isso pode ser implementado de duas formas:</p>
+                <ul>
+                    <li><em>Atributos começam no +0, podem ficar negativos e positivos:</em> É um método mais complexo de se considerar visto que o "Acerto +1" de um personagem Operativo não equivale à "Acerto +1" de um personagem Arconte.</li>
+                    <li><em>Atributos começam na média do Patamar do personagem:</em> Um personagem Arconte (NP20) teria todos os atributos em +16, e a partir daí modificaria. É mais fácil de compreender a equivalência/diferença entre personagens de Patamares diferentes.</li>
                 </ul>
 
                 <h2>Sistema 2: Patamares em Poderes</h2>
-                <p>Alternativa onde o personagem deve evoluir o NP de cada poder individualmente (teto é o NP do personagem), gastando Pontos de Poder para refletir especialização ("mais poderes equivale a menos poderes fortes")[cite: 8].</p>
+                <p>Indo contra o Sistema de Atributos, aqui o personagem deve evoluir o NP de cada poder que possui (sendo que o limite é o NP do personagem). Isso acontece em cada Patamar (Operativo, Arauto, Arconte), onde é necessário gastar Pontos de Poder para evoluir um poder para o Patamar atual. O benefício aqui é ser possível perceber qual é a especialização do personagem e verificar qual poder é forte e qual é fraco (ao invés de todos serem fortes), assim também se aproximando do cenário oficial onde "mais poderes equivale a menos poderes fortes".</p>
             </div>
         </div>
 
-        <!-- SEÇÃO 2: FICHA EDITÁVEL (Espaço reservado) -->
+        <!-- SEÇÃO 2: FICHA EDITÁVEL -->
         <div id="ficha-section" class="content-section">
             <button class="back-btn" onclick="closeSection()">← Voltar ao Menu</button>
             <h2>Ficha Editável</h2>
@@ -295,7 +342,7 @@
             </ul>
         </div>
 
-        <!-- SEÇÃO 3: COMPÊNDIO OFICIAL (Espaço reservado) -->
+        <!-- SEÇÃO 3: COMPÊNDIO OFICIAL -->
         <div id="compendio-section" class="content-section">
             <button class="back-btn" onclick="closeSection()">← Voltar ao Menu</button>
             <h2>Compêndio Oficial</h2>
@@ -305,24 +352,16 @@
 
     <script>
         function openSection(sectionId) {
-            // Esconde o menu principal
             document.getElementById('main-menu').style.display = 'none';
-            
-            // Esconde todas as seções de conteúdo
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(sec => sec.classList.remove('active'));
-            
-            // Mostra a seção escolhida
             document.getElementById(sectionId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function closeSection() {
-            // Esconde todas as seções de conteúdo
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(sec => sec.classList.remove('active'));
-            
-            // Mostra o menu principal de volta
             document.getElementById('main-menu').style.display = 'grid';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
