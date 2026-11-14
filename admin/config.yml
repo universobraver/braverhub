@@ -2,6 +2,9 @@ backend:
   name: github
   repo: universobraver/braverhub
   branch: main
+  base_url: https://universobraver-cms.netlify.app # Coloque exatamente a URL pública do seu site no Netlify
+  auth_type: implicit
+  app_id: '' # Deixe vazio se estiver usando o gateway padrão do Netlify
 
 media_folder: "assets/img"
 public_folder: "/assets/img"
