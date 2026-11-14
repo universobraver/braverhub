@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: universobraver/braverhub.github.io
+  repo: universobraver/braverhub
   branch: main
 
 media_folder: "assets/img"
