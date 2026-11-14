@@ -1,20 +1,22 @@
 backend:
   name: github
-  repo: universobraver/braverhub.github.io  # Substitua pelo seu usuário e nome do repositório
-  branch: main # Ou 'master', dependendo de qual branch principal você usa
+  repo: universobraver/braverhub.github.io
+  branch: main
 
-# Define onde as imagens enviadas pelos editores serão salvas no repositório
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
-# Coleções de conteúdo que o editor poderá modificar (exemplo para uma página de regras ou manual)
 collections:
-  - name: "manual"
-    label: "Manual e Regras"
+  - name: "conteudo_site"
+    label: "Gerenciar Conteúdo do Site"
     files:
-      - file: "index.html"
-        label: "Página Principal (Manual)"
-        name: "home"
+      - file: "conteudo.json"
+        label: "Textos do Manual e Hub"
+        name: "conteudo"
         fields:
-          - { label: "Título da Página", name: "title", widget: "string" }
-          - { label: "Conteúdo do Manual", name: "body", widget: "markdown" }
+          - { label: "Título Principal", name: "titulo_principal", widget: "string" }
+          - { label: "Subtítulo", name: "subtitulo", widget: "string" }
+          - { label: "Título do Manual", name: "manual_titulo", widget: "string" }
+          - { label: "Subtítulo do Manual", name: "manual_subtitulo", widget: "string" }
+          - { label: "Texto de Créditos", name: "creditos_texto", widget: "markdown" }
+          - { label: "Introdução dos Sistemas", name: "introducao_sistemas", widget: "markdown" }
