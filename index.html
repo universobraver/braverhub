@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brasil de Heróis RPG | Hub Oficial</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --bg-color: #0c0f14;
@@ -16,6 +17,9 @@
             --accent-gold: #d4af37;
             --accent-gold-hover: #e6c547;
             --accent-glow: rgba(212, 175, 55, 0.15);
+            --accent-teal: #78d4c4;
+            --accent-amber: #e8b86d;
+            --danger-color: #f08c8c;
         }
 
         * {
@@ -35,10 +39,15 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
+            transition: max-width 0.3s ease;
+        }
+
+        .container.wide-mode {
+            max-width: 1450px;
         }
 
         /* Cabeçalho com toque clássico de RPG */
-        header {
+        header.site-header {
             text-align: center;
             margin-bottom: 50px;
             padding: 30px;
@@ -49,7 +58,7 @@
             position: relative;
         }
 
-        header::after {
+        header.site-header::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -59,7 +68,7 @@
             background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
         }
 
-        header h1 {
+        header.site-header h1 {
             font-family: 'Cinzel', serif;
             color: var(--accent-gold);
             margin-bottom: 10px;
@@ -67,7 +76,7 @@
             letter-spacing: 1px;
         }
 
-        header p {
+        header.site-header p {
             color: var(--text-muted);
             font-size: 1.05rem;
         }
@@ -155,7 +164,7 @@
             padding: 10px 20px;
             border-radius: 6px;
             cursor: pointer;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             font-weight: 500;
             transition: all 0.2s;
             display: inline-flex;
@@ -239,12 +248,550 @@
             border-top: 1px solid var(--border-color);
             margin: 35px 0;
         }
+
+        /* ================= SEÇÃO 2: FICHA EDITÁVEL ================= */
+        #ficha-section {
+            padding: 24px;
+            line-height: 1.45;
+            font-size: 15px;
+        }
+
+        .ficha-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ficha-topbar h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+            margin: 2px 0;
+        }
+
+        .ficha-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        #ficha-section button,
+        #ficha-section input,
+        #ficha-section textarea,
+        #ficha-section select {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+        }
+
+        #ficha-section button {
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--surface-hover);
+            color: var(--text-primary);
+            border-radius: 10px;
+            padding: 9px 12px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        #ficha-section button:hover {
+            border-color: var(--accent-gold);
+        }
+
+        #ficha-section button.primary {
+            background: var(--accent-gold);
+            color: #0c0f14;
+            border-color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        #ficha-section button.primary:hover {
+            background: var(--accent-gold-hover);
+        }
+
+        #ficha-section button.secondary {
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+        }
+
+        #ficha-section button.secondary:hover {
+            background: rgba(120, 212, 196, 0.12);
+        }
+
+        #ficha-section button.danger {
+            color: #ffd3d3;
+            border-color: #78464b;
+        }
+
+        #ficha-section input,
+        #ficha-section textarea,
+        #ficha-section select {
+            width: 100%;
+            background: #0c1118;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 9px;
+            padding: 9px 10px;
+            outline: none;
+        }
+
+        #ficha-section input:focus,
+        #ficha-section textarea:focus,
+        #ficha-section select:focus {
+            border-color: var(--accent-gold);
+        }
+
+        #ficha-section textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        #ficha-section label {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .ficha-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .ficha-sidebar {
+            display: grid;
+            gap: 14px;
+        }
+
+        .ficha-panel {
+            background: rgba(12, 15, 20, 0.75);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .ficha-panel h3.panel-title {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .ficha-field {
+            margin-bottom: 12px;
+        }
+
+        .ficha-two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .ficha-pool {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .ficha-poolbox {
+            background: #0c1118;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .ficha-poolbox small {
+            color: var(--text-muted);
+        }
+
+        .ficha-poolbox strong {
+            display: block;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            margin-top: 4px;
+        }
+
+        .ficha-progress {
+            height: 6px;
+            background: #26303d;
+            border-radius: 9px;
+            overflow: hidden;
+            margin-top: 9px;
+        }
+
+        .ficha-progress span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: var(--accent-gold);
+            transition: width 0.15s;
+        }
+
+        .ficha-item-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .ficha-editor-item {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 68px 32px;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .ficha-editor-item .description,
+        .ficha-editor-item .modifier-text {
+            grid-column: 1 / -1;
+        }
+
+        .ficha-editor-item .description {
+            font-size: 0.85rem;
+        }
+
+        .ficha-modifier-area {
+            grid-column: 1 / -1;
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 8px;
+            margin: 2px 0 6px;
+        }
+
+        .ficha-modifier-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 92px 60px 32px;
+            gap: 5px;
+            margin: 5px 0;
+        }
+
+        .ficha-modifier-row input,
+        .ficha-modifier-row select {
+            padding: 7px;
+            font-size: 0.82rem;
+        }
+
+        .ficha-editor-item input {
+            padding: 8px;
+        }
+
+        .ficha-editor-item button {
+            padding: 7px 0;
+        }
+
+        .ficha-section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .ficha-section-head h3.panel-title {
+            margin: 0;
+        }
+
+        .ficha-compact {
+            padding: 6px 9px;
+            font-size: 0.82rem;
+        }
+
+        #ficha-section details summary {
+            cursor: pointer;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .ficha-sheet-wrap {
+            min-width: 0;
+        }
+
+        .ficha-sheet {
+            padding: clamp(14px, 2vw, 24px);
+            background: linear-gradient(145deg, #1b222c, #11161e);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ficha-sheet-header {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(130px, 200px);
+            gap: 14px;
+            align-items: stretch;
+        }
+
+        .ficha-kicker {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+        }
+
+        .ficha-character-name {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+            font-weight: 700;
+            line-height: 1.1;
+            overflow-wrap: anywhere;
+            margin: 4px 0 6px;
+            color: var(--text-primary);
+        }
+
+        .ficha-subline {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .ficha-portrait {
+            border: 1px dashed var(--accent-gold);
+            background: #0c1118;
+            border-radius: 12px;
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            max-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 6px;
+        }
+
+        .ficha-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ficha-rule {
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), transparent);
+            margin: 4px 0;
+        }
+
+        .ficha-points-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+            margin-bottom: 8px;
+            max-width: 420px;
+        }
+
+        .ficha-point-chip {
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: #1a212b;
+            border: 1px solid var(--border-color);
+        }
+
+        .ficha-point-chip span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .ficha-point-chip strong {
+            font-size: 1rem;
+        }
+
+        .ficha-sheet-meta {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .ficha-meta-card,
+        .ficha-stat-card,
+        .ficha-content-card {
+            background: #0d1219;
+            border: 1px solid var(--border-color);
+            border-radius: 9px;
+            padding: 9px;
+            min-width: 0;
+        }
+
+        .ficha-meta-label {
+            color: var(--text-muted);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .ficha-meta-value {
+            font-weight: 700;
+            overflow-wrap: anywhere;
+            margin-top: 3px;
+            font-size: 0.9rem;
+        }
+
+        .ficha-sheet-section {
+            margin-top: 6px;
+        }
+
+        .ficha-sheet-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.74rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .ficha-sheet-section-title::after {
+            content: "";
+            height: 1px;
+            background: var(--border-color);
+            flex: 1;
+        }
+
+        .ficha-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .ficha-stat-card {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .ficha-stat-name {
+            font-weight: 700;
+            overflow-wrap: anywhere;
+            font-size: 0.92rem;
+        }
+
+        .ficha-stat-desc {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            margin-top: 3px;
+            overflow-wrap: anywhere;
+        }
+
+        .ficha-stat-score {
+            background: #28313e;
+            border: 1px solid var(--border-color);
+            color: var(--accent-gold);
+            min-width: 30px;
+            text-align: center;
+            border-radius: 7px;
+            padding: 3px 6px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .ficha-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ficha-tag {
+            background: #18202b;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 6px 9px;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            font-size: 0.84rem;
+        }
+
+        .ficha-tag b {
+            color: var(--accent-amber);
+            margin-left: 4px;
+        }
+
+        .ficha-narrative {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            line-height: 1.5;
+            min-height: 36px;
+            font-size: 0.9rem;
+        }
+
+        .ficha-empty {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .ficha-footer-note {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        .ficha-notice {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 900px) {
+            .ficha-layout {
+                grid-template-columns: 1fr;
+            }
+            .ficha-sidebar {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .ficha-sidebar .ficha-wide {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 16px 10px;
+            }
+            .content-section,
+            #ficha-section {
+                padding: 16px;
+            }
+            .ficha-sidebar {
+                grid-template-columns: 1fr;
+            }
+            .ficha-sidebar .ficha-wide {
+                grid-column: auto;
+            }
+            .ficha-sheet-header {
+                grid-template-columns: minmax(0, 1fr) 96px;
+                gap: 8px;
+            }
+            .ficha-sheet-meta,
+            .ficha-stats-grid,
+            .ficha-points-strip {
+                grid-template-columns: 1fr;
+            }
+            .ficha-modifier-row {
+                grid-template-columns: minmax(0, 1fr) 72px 54px 30px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
+    <div class="container" id="mainContainer">
+        <header class="site-header">
             <h1>Brasil de Heróis</h1>
             <p>Hub Oficial de Regras, Ficha e Compêndio</p>
         </header>
@@ -390,14 +937,193 @@
         <!-- SEÇÃO 2: FICHA EDITÁVEL -->
         <div id="ficha-section" class="content-section">
             <button class="back-btn" onclick="closeSection()">← Voltar ao Menu</button>
-            <h2>Ficha Editável</h2>
-            <p>Aqui ficará a interface interativa da ficha de personagem baseada no modelo oficial:</p>
-            <ul style="margin-top: 15px; color: var(--text-muted);">
-                <li>Nick, Convite, Tipo, Patamar (NP)</li>
-                <li>Nome Completo, Heroico, Virtude, Histórico, Curso e Profissão</li>
-                <li>Atributos de Arete, Vida, Acerto, Dano, Defesa, EO e EP</li>
-                <li>Seções de Poderes, Perícias, Aparência e Ficha de Evolução</li>
-            </ul>
+
+            <div class="ficha-topbar">
+                <div>
+                    <div class="ficha-kicker">RPG Toolkit</div>
+                    <h2>Editor de Fichas</h2>
+                    <div class="ficha-notice" style="margin-top:2px;">Crie, personalize e exporte fichas de qualquer sistema.</div>
+                </div>
+                <div class="ficha-actions">
+                    <button id="showExampleFicha" class="secondary" type="button">Mostrar Ficha de Exemplo</button>
+                    <button id="exportPng" class="primary" type="button">Baixar PNG</button>
+                    <button id="exportHtml" type="button">Baixar HTML</button>
+                    <button id="resetFicha" class="danger" type="button">Nova ficha</button>
+                </div>
+            </div>
+
+            <div class="ficha-layout">
+                <aside class="ficha-sidebar">
+                    <section class="ficha-panel ficha-wide">
+                        <h3 class="panel-title">Identidade do personagem</h3>
+                        <div class="ficha-field">
+                            <label for="fichaName">Nome do personagem</label>
+                            <input id="fichaName" maxlength="80" placeholder="Ex.: Aurora">
+                        </div>
+                        <div class="ficha-two">
+                            <div class="ficha-field">
+                                <label for="fichaSystem">Sistema</label>
+                                <input id="fichaSystem" maxlength="60" placeholder="Ex.: sistema próprio">
+                            </div>
+                            <div class="ficha-field">
+                                <label for="fichaConcept">Conceito</label>
+                                <input id="fichaConcept" maxlength="80" placeholder="Ex.: guardiã errante">
+                            </div>
+                        </div>
+                        <div class="ficha-two">
+                            <div class="ficha-field">
+                                <label for="fichaPlayer">Jogador(a)</label>
+                                <input id="fichaPlayer" maxlength="80" placeholder="Nome do jogador">
+                            </div>
+                            <div class="ficha-field">
+                                <label for="fichaOrigin">Origem / Arquétipo</label>
+                                <input id="fichaOrigin" maxlength="80" placeholder="Humano, elfo...">
+                            </div>
+                        </div>
+                        <div class="ficha-field">
+                            <label for="fichaImageUrl">Link da imagem do personagem</label>
+                            <input id="fichaImageUrl" type="url" placeholder="https://...">
+                        </div>
+                        <div class="ficha-field">
+                            <label for="fichaImageFile">Ou selecionar imagem do dispositivo</label>
+                            <input id="fichaImageFile" type="file" accept="image/*">
+                            <div class="ficha-notice">A imagem selecionada fica incorporada à ficha e pode ser exportada no HTML.</div>
+                        </div>
+                    </section>
+
+                    <section class="ficha-panel">
+                        <h3 class="panel-title">Regras de pontos</h3>
+                        <div class="ficha-two">
+                            <div class="ficha-field">
+                                <label for="fichaBudget">Pontos disponíveis</label>
+                                <input id="fichaBudget" type="number" min="0" max="9999" value="20">
+                            </div>
+                            <div class="ficha-field">
+                                <label for="fichaStartValue">Valor inicial dos itens</label>
+                                <input id="fichaStartValue" type="number" min="0" max="99" value="0">
+                            </div>
+                        </div>
+                        <div class="ficha-pool">
+                            <div class="ficha-poolbox"><small>Gastos</small><strong id="fichaSpent">0</strong></div>
+                            <div class="ficha-poolbox"><small>Restantes</small><strong id="fichaRemaining">20</strong></div>
+                        </div>
+                        <div class="ficha-progress"><span id="fichaProgress"></span></div>
+                        <p class="ficha-notice" id="fichaPointNotice">Os custos são somados automaticamente.</p>
+                    </section>
+
+                    <section class="ficha-panel">
+                        <div class="ficha-section-head">
+                            <h3 class="panel-title">Atributos</h3>
+                            <button class="ficha-compact" type="button" data-add-ficha="attributes">+ Adicionar</button>
+                        </div>
+                        <div id="attributesEditor" class="ficha-item-list"></div>
+                        <p class="ficha-notice">Cada item tem nome e custo em pontos.</p>
+                    </section>
+
+                    <section class="ficha-panel">
+                        <div class="ficha-section-head">
+                            <h3 class="panel-title">Poderes</h3>
+                            <button class="ficha-compact" type="button" data-add-ficha="powers">+ Adicionar</button>
+                        </div>
+                        <div id="powersEditor" class="ficha-item-list"></div>
+                    </section>
+
+                    <section class="ficha-panel">
+                        <div class="ficha-section-head">
+                            <h3 class="panel-title">Talentos</h3>
+                            <button class="ficha-compact" type="button" data-add-ficha="talents">+ Adicionar</button>
+                        </div>
+                        <div id="talentsEditor" class="ficha-item-list"></div>
+                    </section>
+
+                    <section class="ficha-panel ficha-wide">
+                        <h3 class="panel-title">História e descrição</h3>
+                        <div class="ficha-field">
+                            <label for="fichaHistory">História (máximo de 1.500 caracteres)</label>
+                            <textarea id="fichaHistory" maxlength="1500" rows="5" placeholder="Conte a origem, os objetivos e os acontecimentos importantes..."></textarea>
+                            <div class="ficha-notice"><span id="fichaHistoryCount">0</span>/1500 caracteres</div>
+                        </div>
+                        <div class="ficha-field">
+                            <label for="fichaAppearance">Aparência (máximo de 500 caracteres)</label>
+                            <textarea id="fichaAppearance" maxlength="500" rows="3" placeholder="Descreva a aparência do personagem..."></textarea>
+                            <div class="ficha-notice"><span id="fichaAppearanceCount">0</span>/500 caracteres</div>
+                        </div>
+                        <div class="ficha-field">
+                            <label for="fichaNotes">Anotações (máximo de 500 caracteres)</label>
+                            <textarea id="fichaNotes" maxlength="500" rows="3" placeholder="Fraquezas, objetivos, equipamento..."></textarea>
+                            <div class="ficha-notice"><span id="fichaNotesCount">0</span>/500 caracteres</div>
+                        </div>
+                    </section>
+
+                    <section class="ficha-panel ficha-wide">
+                        <details>
+                            <summary>Personalizar as listas iniciais</summary>
+                            <p class="ficha-notice">Edite os itens diretamente nas seções Atributos, Poderes e Talentos. Você pode renomear ou remover qualquer item e adicionar novos.</p>
+                            <button id="restoreFichaDefaults" type="button" style="margin-top:8px;">Limpar / Restaurar em branco</button>
+                        </details>
+                        <div class="ficha-notice">Os dados permanecem no seu navegador. Exporte o HTML para guardar uma cópia independente.</div>
+                    </section>
+                </aside>
+
+                <main class="ficha-sheet-wrap">
+                    <article class="ficha-sheet" id="characterSheet">
+                        <div class="ficha-sheet-header">
+                            <div>
+                                <div class="ficha-kicker" id="viewSystem">SISTEMA</div>
+                                <div class="ficha-character-name" id="viewName">Personagem Sem Nome</div>
+                                <div class="ficha-subline" id="viewConcept">Sem conceito definido</div>
+                                <div class="ficha-points-strip">
+                                    <div class="ficha-point-chip"><span>Pontos disponíveis</span><strong id="viewBudget">20</strong></div>
+                                    <div class="ficha-point-chip"><span>Pontos gastos</span><strong id="viewSpent">0</strong></div>
+                                    <div class="ficha-point-chip"><span>Saldo</span><strong id="viewRemaining">20</strong></div>
+                                </div>
+                                <div class="ficha-sheet-meta">
+                                    <div class="ficha-meta-card"><div class="ficha-meta-label">Jogador(a)</div><div class="ficha-meta-value" id="viewPlayer">—</div></div>
+                                    <div class="ficha-meta-card"><div class="ficha-meta-label">Origem</div><div class="ficha-meta-value" id="viewOrigin">—</div></div>
+                                    <div class="ficha-meta-card"><div class="ficha-meta-label">Sistema</div><div class="ficha-meta-value" id="viewSystemMeta">—</div></div>
+                                </div>
+                            </div>
+                            <div class="ficha-portrait" id="fichaPortrait">
+                                <span class="ficha-empty">Sem imagem</span>
+                            </div>
+                        </div>
+
+                        <div class="ficha-rule"></div>
+
+                        <section class="ficha-sheet-section">
+                            <div class="ficha-sheet-section-title">Atributos</div>
+                            <div class="ficha-stats-grid" id="viewAttributes"></div>
+                        </section>
+
+                        <section class="ficha-sheet-section">
+                            <div class="ficha-sheet-section-title">Poderes</div>
+                            <div class="ficha-tags" id="viewPowers"></div>
+                        </section>
+
+                        <section class="ficha-sheet-section">
+                            <div class="ficha-sheet-section-title">Talentos</div>
+                            <div class="ficha-tags" id="viewTalents"></div>
+                        </section>
+
+                        <section class="ficha-sheet-section">
+                            <div class="ficha-sheet-section-title">História</div>
+                            <div class="ficha-content-card ficha-narrative" id="viewHistory"></div>
+                        </section>
+
+                        <section class="ficha-sheet-section">
+                            <div class="ficha-sheet-section-title">Aparência</div>
+                            <div class="ficha-content-card ficha-narrative" id="viewAppearance"></div>
+                        </section>
+
+                        <section class="ficha-sheet-section">
+                            <div class="ficha-sheet-section-title">Anotações</div>
+                            <div class="ficha-content-card ficha-narrative" id="viewNotes"></div>
+                        </section>
+
+                        <div class="ficha-footer-note">Brasil de Heróis RPG • Ficha Editável</div>
+                    </article>
+                </main>
+            </div>
         </div>
 
         <!-- SEÇÃO 3: COMPÊNDIO OFICIAL -->
@@ -414,15 +1140,574 @@
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(sec => sec.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
+
+            const mainContainer = document.getElementById('mainContainer');
+            if (sectionId === 'ficha-section') {
+                mainContainer.classList.add('wide-mode');
+            } else {
+                mainContainer.classList.remove('wide-mode');
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function closeSection() {
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById('mainContainer').classList.remove('wide-mode');
             document.getElementById('main-menu').style.display = 'grid';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        /* ================= LÓGICA DA FICHA EDITÁVEL ================= */
+        const BLANK_FICHA = {
+            name: '',
+            system: '',
+            concept: '',
+            player: '',
+            origin: '',
+            imageUrl: '',
+            imageData: '',
+            budget: 20,
+            startValue: 0,
+            attributes: [],
+            powers: [],
+            talents: [],
+            history: '',
+            appearance: '',
+            notes: ''
+        };
+
+        const EXAMPLE_FICHA = {
+            name: 'Patrícia Piroténica',
+            system: 'Braver',
+            concept: 'Policial do Super Esquadrão de Combate ao Crime',
+            player: '',
+            origin: 'Elementista',
+            imageUrl: '',
+            imageData: '',
+            budget: 32,
+            startValue: 0,
+            attributes: [
+                { name: 'Força', cost: 2, description: 'Potência física' },
+                { name: 'Agilidade', cost: 4, description: 'Reflexos e movimento' },
+                { name: 'Estamina', cost: 3, description: 'Resistência e vigor' },
+                { name: 'Raciocínio', cost: 1, description: 'Lógica e análise' },
+                { name: 'Intuição', cost: 2, description: 'Percepção instintiva' },
+                { name: 'Psique', cost: 2, description: 'Força mental e emocional' }
+            ],
+            powers: [
+                {
+                    name: 'Controle Elemental: Luz e Fogos de Artifício',
+                    cost: 4,
+                    description: 'Pirotécnica é capaz de transformar o espectro luminoso em explosões.',
+                    modifiers: [
+                        { name: 'Área', type: 'extra', points: 2, text: '' },
+                        { name: 'Alcance', type: 'extra', points: 2, text: '' },
+                        { name: 'Alternativo: Rajada', type: 'extra', points: 1, text: '' },
+                        { name: 'Alternativo: Salto', type: 'extra', points: 1, text: '' }
+                    ]
+                },
+                {
+                    name: 'Imunidade: Explosões',
+                    cost: 1,
+                    description: 'Cria uma barreira protetora',
+                    modifiers: []
+                }
+            ],
+            talents: [
+                { name: 'Investigação', cost: 1, description: '' },
+                { name: 'Poder: Controle Elemental', cost: 2, description: 'Especialista no uso de seus poderes' },
+                { name: 'Atletismo', cost: 1, description: '' },
+                { name: 'Rompe Tanque', cost: 1, description: 'Ataque especial capaz de atravessar blindagem. Limitado a alcance próximo, mas reduz em 2 Proteção.' }
+            ],
+            history: '',
+            appearance: '',
+            notes: ''
+        };
+
+        let fichaState = structuredClone(BLANK_FICHA);
+
+        const el = (id) => document.getElementById(id);
+
+        function applyFichaData(data) {
+            fichaState = structuredClone(data);
+            el('fichaImageFile').value = '';
+            syncInputsFromState();
+            renderEditors();
+            updatePointsAndSheet();
+        }
+
+        function syncInputsFromState() {
+            el('fichaName').value = fichaState.name;
+            el('fichaSystem').value = fichaState.system;
+            el('fichaConcept').value = fichaState.concept;
+            el('fichaPlayer').value = fichaState.player;
+            el('fichaOrigin').value = fichaState.origin;
+            el('fichaImageUrl').value = fichaState.imageUrl;
+            el('fichaBudget').value = fichaState.budget;
+            el('fichaStartValue').value = fichaState.startValue;
+            el('fichaHistory').value = fichaState.history;
+            el('fichaAppearance').value = fichaState.appearance;
+            el('fichaNotes').value = fichaState.notes;
+        }
+
+        function renderEditors() {
+            renderSimpleList('attributesEditor', 'attributes');
+            renderPowersEditor();
+            renderSimpleList('talentsEditor', 'talents');
+        }
+
+        function renderSimpleList(containerId, key) {
+            const container = el(containerId);
+            container.innerHTML = '';
+
+            fichaState[key].forEach((item, idx) => {
+                const row = document.createElement('div');
+                row.className = 'ficha-editor-item';
+
+                const nameInput = document.createElement('input');
+                nameInput.maxLength = 80;
+                nameInput.placeholder = 'Nome do item';
+                nameInput.value = item.name;
+                nameInput.addEventListener('input', (e) => {
+                    fichaState[key][idx].name = e.target.value;
+                    updateSheetView();
+                });
+
+                const costInput = document.createElement('input');
+                costInput.type = 'number';
+                costInput.min = 0;
+                costInput.max = 999;
+                costInput.title = 'Custo';
+                costInput.value = item.cost;
+                costInput.addEventListener('input', (e) => {
+                    fichaState[key][idx].cost = Math.max(0, Number(e.target.value) || 0);
+                    updatePointsAndSheet();
+                });
+
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = 'danger';
+                delBtn.textContent = '×';
+                delBtn.title = 'Remover item';
+                delBtn.addEventListener('click', () => {
+                    fichaState[key].splice(idx, 1);
+                    renderEditors();
+                    updatePointsAndSheet();
+                });
+
+                const descInput = document.createElement('input');
+                descInput.className = 'description';
+                descInput.maxLength = 240;
+                descInput.placeholder = 'Descrição: o que faz?';
+                descInput.value = item.description || '';
+                descInput.addEventListener('input', (e) => {
+                    fichaState[key][idx].description = e.target.value;
+                    updateSheetView();
+                });
+
+                row.append(nameInput, costInput, delBtn, descInput);
+                container.appendChild(row);
+            });
+        }
+
+        function renderPowersEditor() {
+            const container = el('powersEditor');
+            container.innerHTML = '';
+
+            fichaState.powers.forEach((power, pIdx) => {
+                const row = document.createElement('div');
+                row.className = 'ficha-editor-item';
+
+                const nameInput = document.createElement('input');
+                nameInput.maxLength = 80;
+                nameInput.placeholder = 'Nome do poder';
+                nameInput.value = power.name;
+                nameInput.addEventListener('input', (e) => {
+                    fichaState.powers[pIdx].name = e.target.value;
+                    updateSheetView();
+                });
+
+                const costInput = document.createElement('input');
+                costInput.type = 'number';
+                costInput.min = 0;
+                costInput.max = 999;
+                costInput.title = 'Custo base';
+                costInput.value = power.cost;
+                costInput.addEventListener('input', (e) => {
+                    fichaState.powers[pIdx].cost = Math.max(0, Number(e.target.value) || 0);
+                    updatePointsAndSheet();
+                });
+
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = 'danger';
+                delBtn.textContent = '×';
+                delBtn.title = 'Remover poder';
+                delBtn.addEventListener('click', () => {
+                    fichaState.powers.splice(pIdx, 1);
+                    renderEditors();
+                    updatePointsAndSheet();
+                });
+
+                const descInput = document.createElement('input');
+                descInput.className = 'description';
+                descInput.maxLength = 240;
+                descInput.placeholder = 'Descrição: o que faz?';
+                descInput.value = power.description || '';
+                descInput.addEventListener('input', (e) => {
+                    fichaState.powers[pIdx].description = e.target.value;
+                    updateSheetView();
+                });
+
+                const modArea = document.createElement('div');
+                modArea.className = 'ficha-modifier-area';
+
+                const modHead = document.createElement('div');
+                modHead.className = 'ficha-section-head';
+                const modLabel = document.createElement('label');
+                modLabel.textContent = 'Modificadores (extras e limites)';
+                modLabel.style.margin = '0';
+
+                const addModBtn = document.createElement('button');
+                addModBtn.type = 'button';
+                addModBtn.className = 'ficha-compact';
+                addModBtn.textContent = '+ Modificador';
+                addModBtn.addEventListener('click', () => {
+                    if (!Array.isArray(fichaState.powers[pIdx].modifiers)) {
+                        fichaState.powers[pIdx].modifiers = [];
+                    }
+                    fichaState.powers[pIdx].modifiers.push({
+                        name: '',
+                        type: 'extra',
+                        points: 1,
+                        text: ''
+                    });
+                    renderPowersEditor();
+                    updatePointsAndSheet();
+                });
+
+                modHead.append(modLabel, addModBtn);
+                modArea.appendChild(modHead);
+
+                (power.modifiers || []).forEach((mod, mIdx) => {
+                    const mRow = document.createElement('div');
+                    mRow.className = 'ficha-modifier-row';
+
+                    const mName = document.createElement('input');
+                    mName.maxLength = 80;
+                    mName.placeholder = 'Nome do modificador';
+                    mName.value = mod.name;
+                    mName.addEventListener('input', (e) => {
+                        fichaState.powers[pIdx].modifiers[mIdx].name = e.target.value;
+                        updateSheetView();
+                    });
+
+                    const mType = document.createElement('select');
+                    mType.innerHTML = '<option value="extra">Extra (+custo)</option><option value="limit">Limite (-custo)</option>';
+                    mType.value = mod.type || 'extra';
+                    mType.addEventListener('change', (e) => {
+                        fichaState.powers[pIdx].modifiers[mIdx].type = e.target.value;
+                        updatePointsAndSheet();
+                    });
+
+                    const mPts = document.createElement('input');
+                    mPts.type = 'number';
+                    mPts.min = 0;
+                    mPts.max = 999;
+                    mPts.title = 'Pontos';
+                    mPts.value = mod.points;
+                    mPts.addEventListener('input', (e) => {
+                        fichaState.powers[pIdx].modifiers[mIdx].points = Math.max(0, Number(e.target.value) || 0);
+                        updatePointsAndSheet();
+                    });
+
+                    const mDel = document.createElement('button');
+                    mDel.type = 'button';
+                    mDel.className = 'danger';
+                    mDel.textContent = '×';
+                    mDel.addEventListener('click', () => {
+                        fichaState.powers[pIdx].modifiers.splice(mIdx, 1);
+                        renderPowersEditor();
+                        updatePointsAndSheet();
+                    });
+
+                    const mText = document.createElement('input');
+                    mText.className = 'modifier-text';
+                    mText.maxLength = 180;
+                    mText.placeholder = 'O que muda? (extra ou limite)';
+                    mText.value = mod.text || '';
+                    mText.addEventListener('input', (e) => {
+                        fichaState.powers[pIdx].modifiers[mIdx].text = e.target.value;
+                        updateSheetView();
+                    });
+
+                    mRow.append(mName, mType, mPts, mDel, mText);
+                    modArea.appendChild(mRow);
+                });
+
+                row.append(nameInput, costInput, delBtn, descInput, modArea);
+                container.appendChild(row);
+            });
+        }
+
+        function computePowerCost(power) {
+            const base = Number(power.cost) || 0;
+            const mods = Array.isArray(power.modifiers) ? power.modifiers : [];
+            const delta = mods.reduce((acc, m) => {
+                const pts = Number(m.points) || 0;
+                return m.type === 'limit' ? acc - pts : acc + pts;
+            }, 0);
+            return Math.max(0, base + delta);
+        }
+
+        function computeTotalSpent() {
+            const attrSum = fichaState.attributes.reduce((s, a) => s + (Number(a.cost) || 0), 0);
+            const powSum = fichaState.powers.reduce((s, p) => s + computePowerCost(p), 0);
+            const talSum = fichaState.talents.reduce((s, t) => s + (Number(t.cost) || 0), 0);
+            return attrSum + powSum + talSum;
+        }
+
+        function updatePointsAndSheet() {
+            const budget = Math.max(0, Number(fichaState.budget) || 0);
+            const spent = computeTotalSpent();
+            const remaining = budget - spent;
+            const pct = budget > 0 ? Math.min(100, Math.round((spent / budget) * 100)) : 0;
+
+            el('fichaSpent').textContent = spent;
+            el('fichaRemaining').textContent = remaining;
+            el('fichaRemaining').style.color = remaining < 0 ? 'var(--danger-color)' : 'var(--text-primary)';
+            el('fichaProgress').style.width = pct + '%';
+            el('fichaProgress').style.background = remaining < 0 ? 'var(--danger-color)' : 'var(--accent-gold)';
+
+            el('fichaPointNotice').textContent = remaining < 0
+                ? `Atenção: orçamento excedido em ${Math.abs(remaining)} ponto(s).`
+                : 'Os custos são somados automaticamente.';
+
+            el('viewBudget').textContent = budget;
+            el('viewSpent').textContent = spent;
+            el('viewRemaining').textContent = remaining;
+            el('viewRemaining').style.color = remaining < 0 ? 'var(--danger-color)' : 'var(--text-primary)';
+
+            updateSheetView();
+        }
+
+        function updateSheetView() {
+            const sysText = fichaState.system.trim() || 'SISTEMA';
+            el('viewSystem').textContent = sysText.toUpperCase();
+            el('viewSystemMeta').textContent = fichaState.system.trim() || '—';
+            el('viewName').textContent = fichaState.name.trim() || 'Personagem Sem Nome';
+            el('viewConcept').textContent = fichaState.concept.trim() || 'Sem conceito definido';
+            el('viewPlayer').textContent = fichaState.player.trim() || '—';
+            el('viewOrigin').textContent = fichaState.origin.trim() || '—';
+
+            // Retrato
+            const portrait = el('fichaPortrait');
+            const imgSrc = fichaState.imageData || fichaState.imageUrl.trim();
+            if (imgSrc) {
+                portrait.innerHTML = `<img src="${escapeHtml(imgSrc)}" alt="Imagem de ${escapeHtml(fichaState.name || 'Personagem')}">`;
+            } else {
+                portrait.innerHTML = '<span class="ficha-empty">Sem imagem</span>';
+            }
+
+            // Atributos
+            const attrView = el('viewAttributes');
+            attrView.innerHTML = '';
+            if (fichaState.attributes.length === 0) {
+                attrView.innerHTML = '<div class="ficha-empty">Nenhum atributo adicionado.</div>';
+            } else {
+                fichaState.attributes.forEach(a => {
+                    const card = document.createElement('div');
+                    card.className = 'ficha-stat-card';
+                    const score = (Number(fichaState.startValue) || 0) + (Number(a.cost) || 0);
+                    card.innerHTML = `
+                        <div>
+                            <div class="ficha-stat-name">${escapeHtml(a.name || 'Sem nome')}</div>
+                            ${a.description ? `<div class="ficha-stat-desc">${escapeHtml(a.description)}</div>` : ''}
+                        </div>
+                        <div class="ficha-stat-score">${score}</div>
+                    `;
+                    attrView.appendChild(card);
+                });
+            }
+
+            // Poderes
+            const powView = el('viewPowers');
+            powView.innerHTML = '';
+            if (fichaState.powers.length === 0) {
+                powView.innerHTML = '<div class="ficha-empty">Nenhum poder adicionado.</div>';
+            } else {
+                fichaState.powers.forEach(p => {
+                    const tag = document.createElement('div');
+                    tag.className = 'ficha-tag';
+                    const totalCost = computePowerCost(p);
+                    const mods = (p.modifiers || [])
+                        .filter(m => m.name || m.text)
+                        .map(m => {
+                            const prefix = m.type === 'limit' ? 'Limite' : 'Extra';
+                            const ptsLabel = m.points ? ` (${m.type === 'limit' ? '-' : '+'}${m.points})` : '';
+                            const detail = m.text ? `: ${m.text}` : '';
+                            return `${prefix} ${m.name || 'Modificador'}${ptsLabel}${detail}`;
+                        })
+                        .join(' • ');
+
+                    tag.innerHTML = `
+                        <strong>${escapeHtml(p.name || 'Poder sem nome')}</strong><b>[${totalCost} pts]</b>
+                        ${p.description ? `<div class="ficha-stat-desc">${escapeHtml(p.description)}</div>` : ''}
+                        ${mods ? `<div class="ficha-stat-desc" style="color:var(--accent-teal);">${escapeHtml(mods)}</div>` : ''}
+                    `;
+                    powView.appendChild(tag);
+                });
+            }
+
+            // Talentos
+            const talView = el('viewTalents');
+            talView.innerHTML = '';
+            if (fichaState.talents.length === 0) {
+                talView.innerHTML = '<div class="ficha-empty">Nenhum talento adicionado.</div>';
+            } else {
+                fichaState.talents.forEach(t => {
+                    const tag = document.createElement('div');
+                    tag.className = 'ficha-tag';
+                    tag.innerHTML = `
+                        <strong>${escapeHtml(t.name || 'Talento sem nome')}</strong><b>[${Number(t.cost) || 0} pts]</b>
+                        ${t.description ? `<div class="ficha-stat-desc">${escapeHtml(t.description)}</div>` : ''}
+                    `;
+                    talView.appendChild(tag);
+                });
+            }
+
+            // Narrativas + contadores
+            setNarrativeField('fichaHistory', 'viewHistory', 'fichaHistoryCount', 'Nenhuma história registrada.');
+            setNarrativeField('fichaAppearance', 'viewAppearance', 'fichaAppearanceCount', 'Nenhuma aparência descrita.');
+            setNarrativeField('fichaNotes', 'viewNotes', 'fichaNotesCount', 'Nenhuma anotação registrada.');
+        }
+
+        function setNarrativeField(inputId, viewId, countId, emptyText) {
+            const prop = inputId.replace('ficha', '').toLowerCase();
+            const val = fichaState[prop] ?? el(inputId).value;
+            el(countId).textContent = val.length;
+            const target = el(viewId);
+            if (val.trim()) {
+                target.textContent = val;
+                target.classList.remove('ficha-empty');
+            } else {
+                target.textContent = emptyText;
+                target.classList.add('ficha-empty');
+            }
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function bindFichaEvents() {
+            const textBindings = [
+                ['fichaName', 'name'],
+                ['fichaSystem', 'system'],
+                ['fichaConcept', 'concept'],
+                ['fichaPlayer', 'player'],
+                ['fichaOrigin', 'origin'],
+                ['fichaHistory', 'history'],
+                ['fichaAppearance', 'appearance'],
+                ['fichaNotes', 'notes']
+            ];
+
+            textBindings.forEach(([inputId, prop]) => {
+                el(inputId).addEventListener('input', (e) => {
+                    fichaState[prop] = e.target.value;
+                    updateSheetView();
+                });
+            });
+
+            el('fichaImageUrl').addEventListener('input', (e) => {
+                fichaState.imageUrl = e.target.value;
+                if (e.target.value.trim()) fichaState.imageData = '';
+                updateSheetView();
+            });
+
+            el('fichaImageFile').addEventListener('change', (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    fichaState.imageData = String(reader.result || '');
+                    updateSheetView();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            el('fichaBudget').addEventListener('input', (e) => {
+                fichaState.budget = Math.max(0, Number(e.target.value) || 0);
+                updatePointsAndSheet();
+            });
+
+            el('fichaStartValue').addEventListener('input', (e) => {
+                fichaState.startValue = Number(e.target.value) || 0;
+                updateSheetView();
+            });
+
+            document.querySelectorAll('[data-add-ficha]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const key = btn.getAttribute('data-add-ficha');
+                    if (key === 'powers') {
+                        fichaState.powers.push({ name: '', cost: 1, description: '', modifiers: [] });
+                    } else {
+                        fichaState[key].push({ name: '', cost: 1, description: '' });
+                    }
+                    renderEditors();
+                    updatePointsAndSheet();
+                });
+            });
+
+            el('showExampleFicha').addEventListener('click', () => {
+                applyFichaData(EXAMPLE_FICHA);
+            });
+
+            el('restoreFichaDefaults').addEventListener('click', () => {
+                applyFichaData(BLANK_FICHA);
+            });
+
+            el('resetFicha').addEventListener('click', () => {
+                applyFichaData(BLANK_FICHA);
+            });
+
+            el('exportPng').addEventListener('click', async () => {
+                if (typeof html2canvas !== 'function') {
+                    alert('Biblioteca html2canvas não carregou.');
+                    return;
+                }
+                const sheetNode = el('characterSheet');
+                const canvas = await html2canvas(sheetNode, { backgroundColor: '#11161e', scale: 2 });
+                const link = document.createElement('a');
+                const safeName = (fichaState.name.trim() || 'personagem').toLowerCase().replace(/[^a-z0-9-_]+/g, '-');
+                link.download = `ficha-${safeName}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+
+            el('exportHtml').addEventListener('click', () => {
+                const safeName = (fichaState.name.trim() || 'personagem').toLowerCase().replace(/[^a-z0-9-_]+/g, '-');
+                const htmlDoc = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Ficha - ${escapeHtml(fichaState.name || 'Personagem')}</title><style>body{font-family:sans-serif;background:#11161e;color:#e6edf3;padding:24px;}article{max-width:900px;margin:auto;}</style></head><body>${el('characterSheet').outerHTML}</body></html>`;
+                const blob = new Blob([htmlDoc], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = `ficha-${safeName}.html`;
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        syncInputsFromState();
+        renderEditors();
+        bindFichaEvents();
+        updatePointsAndSheet();
     </script>
 </body>
 </html>
